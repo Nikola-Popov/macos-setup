@@ -1,0 +1,36 @@
+---
+- name: Determine if SDKMAN is already installed
+  ansible.builtin.command: sdk version
+  register: sdkman_check
+  failed_when: false
+  changed_when: false
+
+- name: Install SDKMAN if not present
+  when: sdkman_check.rc != 0
+  block:
+    - name: Download SDKMAN install script
+      ansible.builtin.get_url:
+        url: "{{ sdkman_repository }}"
+        dest: "{{ sdkman_installer_path }}"
+        mode: '0755'
+
+    - name: Run SDKMAN install script
+      ansible.builtin.command: "{{ sdkman_installer_path }}"
+      args:
+        creates: "{{ ansible_user_dir }}/.sdkman"
+
+- name: Ensure SDKMAN init script exists
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.sdkman/bin/sdkman-init.sh"
+  register: sdkman_init_script
+
+- name: Fail if SDKMAN init script is missing or empty
+  ansible.builtin.fail:
+    msg: "SDKMAN init script not found or is empty. Make sure SDKMAN is installed."
+  when: not sdkman_init_script.stat.exists or sdkman_init_script.stat.size == 0
+
+- name: Install Java
+  ansible.builtin.import_tasks: java.yaml
+
+- name: Install Maven
+  ansible.builtin.import_tasks: maven.yaml

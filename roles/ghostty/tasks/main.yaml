@@ -1,0 +1,13 @@
+---
+- name: Create config to '$HOME/Library/Application\ Support/com.mitchellh.ghostty'
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/config"
+    dest: "{{ ansible_user_dir }}/Library/Application\ Support/com.mitchellh.ghostty"
+    mode: '0644'
+
+- name: Configure SSH to fall back to a known terminfo entry
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_user_dir }}/.ssh/config"
+    block: |
+      Host *
+        SetEnv TERM=xterm-256color

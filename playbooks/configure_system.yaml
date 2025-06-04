@@ -1,0 +1,18 @@
+---
+- name: Set up the system
+  hosts: all
+
+  pre_tasks:
+    - name: Create various folders
+      ansible.builtin.import_tasks: ../pre_tasks/create_folders.yaml
+      tags:
+        - always
+
+    - name: Ensure Homebrew is installed
+      ansible.builtin.import_tasks: ../pre_tasks/ensure_homebrew.yaml
+      tags:
+        - always
+
+  roles:
+    - system
+    - homebrew

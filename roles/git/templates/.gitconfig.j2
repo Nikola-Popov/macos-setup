@@ -1,0 +1,66 @@
+[user]
+    name = {{ git_name }}
+    email = {{ git_email }}
+
+[core]
+    autocrlf = false
+    excludesfile = ~/.gitignore_global
+    pager = delta
+    editor = "nvim"
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[interactive]
+    diffFilter = delta
+
+[delta]
+    # author: https://github.com/lvdh
+    dark = true
+    side-by-side=true
+    right-arrow = >
+    syntax-theme = Coldark-Dark
+    blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
+    blame-palette = "purple darkmagenta darkviolet darkslateblue blueviolet rebeccapurple slateblue mediumpurple mediumslateblue"
+    commit-decoration-style = none
+    commit-style = bold white olive
+    grep-file-style = olive
+    grep-line-number-style = orange
+    keep-plus-minus-markers = true
+    line-numbers = true
+    line-numbers-minus-style = red
+    line-numbers-plus-style = green
+    line-numbers-left-style = grey
+    line-numbers-left-format = "{nm:>1}┊"
+    line-numbers-right-style = orange
+    line-numbers-right-format = "{np:>1}┊"
+    line-numbers-zero-style = gray
+    minus-emph-style = lemonchiffon crimson underline
+    minus-empty-line-marker-style = normal maroon
+    minus-style = syntax darkred
+    plus-emph-style = lemonchiffon olivedrab underline
+    plus-empty-line-marker-style = normal seagreen
+    plus-style = syntax darkgreen
+    whitespace-error-style = black white
+    zero-style = syntax
+    # -- decorations
+    file-decoration-style = olive overline
+    file-added-label = [✚]
+    file-copied-label = [≡]
+    file-modified-label = [≈]
+    file-removed-label = [✖]
+    file-renamed-label = [→]
+    file-style = blue bold
+    hunk-header-decoration-style = none
+    hunk-header-file-style = olive
+    hunk-header-line-number-style = orange
+    hunk-header-style = file purple
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    colorMoved = default

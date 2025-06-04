@@ -1,0 +1,31 @@
+---
+- name: Apply macOS Finder settings
+  notify: Restart {{ system_services.finder }}
+  block:
+    - name: Show path bar in Finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowPathbar
+        type: bool
+        value: true
+
+    - name: Set Finder default view style to List View
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        type: string
+        value: Nlsv
+
+    - name: Disable Finder warning when changing file extensions
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXEnableExtensionChangeWarning
+        type: bool
+        value: false
+
+    - name: Set sidebar and table view text size to Small
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: NSTableViewDefaultSizeMode
+        type: int
+        value: 1

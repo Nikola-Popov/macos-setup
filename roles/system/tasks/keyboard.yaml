@@ -1,0 +1,7 @@
+---
+- name: Enable the function (Fn) key as standard function keys
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.keyboard.fnState
+    type: bool
+    value: true

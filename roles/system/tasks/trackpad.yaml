@@ -1,0 +1,35 @@
+---
+- name: Apply macOS Finder settings
+  notify: "Restart {{ system_services.systemuiserver }}"
+  block:
+    - name: Hide recent applications from the Dock
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.swipescrolldirection
+        type: bool
+        value: false
+
+    - name: Set trackpad tracking speed to 2.0
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.trackpad.scaling
+        type: float
+        value: 2.0
+
+    - name: Disable most of trackpad gestures
+      community.general.osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: int
+        value: 0
+      loop:
+        - domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+          key: "TrackpadTwoFingerDoubleTapGesture"
+        - domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+          key: "TrackpadPinch"
+        - domain: "com.apple.AppleMultitouchTrackpad"
+          key: "TrackpadThreeFingerVertSwipeGesture"
+        - domain: "com.apple.AppleMultitouchTrackpad"
+          key: "TrackpadFourFingerVertSwipeGesture"
+        - domain: "com.apple.AppleMultitouchTrackpad"
+          key: "TrackpadFourFingerPinchGesture"

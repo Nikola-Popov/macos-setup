@@ -1,0 +1,12 @@
+---
+- name: Create if needed the {{ oh_my_posh_theme_dir }}
+  ansible.builtin.file:
+    path: "{{ oh_my_posh_theme_dir }}"
+    mode: "0755"
+    state: directory
+
+- name: Copy custom theme to {{ oh_my_posh_theme_dir }}
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/custom_oh_my_posh_theme.omp.json"
+    dest: "{{ oh_my_posh_theme_dir }}"
+    mode: '0644'

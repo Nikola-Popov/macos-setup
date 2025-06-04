@@ -1,0 +1,9 @@
+---
+- name: Dynamically include all task files in role's tasks folder except main.yaml
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop: >-
+    {{
+      lookup('fileglob', role_path + '/tasks/*.yaml', wantlist=True)
+      | reject('search', 'main.yaml')
+      | list
+    }}

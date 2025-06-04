@@ -1,0 +1,30 @@
+---
+homebrew_packages:
+  - helm
+  - pyenv
+  - eza
+  - neovim
+  - zoxide
+  - bat
+  - fd
+  - k9s
+  - node
+  - fzf
+  - kubernetes-cli
+  - oh-my-posh
+  - git-delta
+
+homebrew_cask_packages:
+  - adobe-acrobat-reader
+  - google-chrome
+  - raycast
+  - bruno
+  - intellij-idea-ce
+  - visual-studio-code
+  - docker
+  - ghostty
+  - pycharm-ce
+  - vmware-fusion
+
+homebrew_fonts:
+  - font-jetbrains-mono

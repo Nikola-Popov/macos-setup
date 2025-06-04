@@ -1,0 +1,6 @@
+---
+- name: Restart macOS services to apply changes
+  ansible.builtin.shell: killall {{ item }} || true
+  listen: "Restart {{ item }}"
+  changed_when: false
+  loop: "{{ system_services.values() | list }}"

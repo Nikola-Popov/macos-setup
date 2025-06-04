@@ -1,0 +1,7 @@
+---
+- name: Set mouse tracking speed to 2.0
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.mouse.scaling
+    type: float
+    value: 2.0

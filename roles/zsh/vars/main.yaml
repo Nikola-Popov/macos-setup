@@ -1,0 +1,1 @@
+zsh_custom_path: "{{ lookup('ansible.builtin.env', 'ZSH') }}/custom"

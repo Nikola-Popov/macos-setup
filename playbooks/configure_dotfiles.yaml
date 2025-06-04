@@ -1,0 +1,12 @@
+---
+- name: Configure dotfiles for individual tools
+  hosts: all
+
+  roles:
+    - git
+    - zsh
+    - oh_my_zsh
+    - oh_my_posh
+    # - nvim
+    - ghostty
+    - sdkman
