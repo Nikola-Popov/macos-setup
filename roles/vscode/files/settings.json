@@ -1,0 +1,14 @@
+{
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.wordWrap": "on",
+    "editor.largeFileOptimizations": false,
+    "editor.wordWrapColumn": 120,
+    "redhat.telemetry.enabled": false,
+    "editor.scrollbar.horizontal": "visible",
+    "editor.scrollbar.verticalScrollbarSize": 3,
+    "editor.fontSize": 10,
+    "editor.fontFamily": "'JetBrains Mono NL', Menlo, Monaco, 'Courier New', monospace",
+    "editor.guides.bracketPairs": true
+}

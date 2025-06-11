@@ -1,0 +1,13 @@
+---
+- name: Install extensions
+  ansible.builtin.shell: |
+    while read ext; do
+      code --install-extension --force "$ext"
+    done < {{ role_path }}/files/extensions.txt
+  changed_when: false
+
+- name: Create settings.json
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/settings.json"
+    dest: "{{ macos_app_folder }}/Code/User"
+    mode: '0644'
