@@ -1,24 +1,54 @@
 ---
-- name: Installing Homebrew Packages
+- name: Initialize empty package lists
+  ansible.builtin.set_fact:
+    homebrew_packages: []
+    homebrew_cask_packages: []
+
+- name: Merge packages from selected profiles
+  ansible.builtin.set_fact:
+    homebrew_packages: "{{ homebrew_packages + (homebrew_package_profiles[item].packages | default([])) }}"
+    homebrew_cask_packages: "{{ homebrew_cask_packages + (homebrew_package_profiles[item].cask_packages | default([])) }}"
+  loop: "{{ homebrew_profiles_enabled }}"
+  when: homebrew_package_profiles[item] is defined
+
+- name: Deduplicate package lists
+  ansible.builtin.set_fact:
+    homebrew_packages: "{{ homebrew_packages | unique }}"
+    homebrew_cask_packages: "{{ homebrew_cask_packages | unique }}"
+
+- name: Evaluate what needs to be installed
+  ansible.builtin.set_fact:
+    has_homebrew: "{{ homebrew_check.stat.exists }}"
+    has_homebrew_packages: "{{ homebrew_packages | length > 0 }}"
+    has_homebrew_cask_packages: "{{ homebrew_cask_packages | length > 0 }}"
+    has_homebrew_fonts: "{{ homebrew_fonts | default([]) | length > 0 }}"
+
+- name: Install Homebrew packages
   community.general.homebrew:
     name: "{{ homebrew_packages }}"
     state: present
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
+  register: homebrew_packages_result
+  until: homebrew_packages_result is successful
+  retries: "{{ default_task_retry }}"
+  delay: "{{ default_task_delay }}"
+  when: has_homebrew and has_homebrew_packages
 
-- name: Installing Homebrew Cask Packages
+- name: Install Homebrew cask packages
   community.general.homebrew_cask:
     name: "{{ homebrew_cask_packages }}"
     state: present
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
+  register: homebrew_cask_result
+  until: homebrew_cask_result is successful
+  retries: "{{ default_task_retry }}"
+  delay: "{{ default_task_delay }}"
+  when: has_homebrew and has_homebrew_cask_packages
 
-- name: Installing fonts via Homebrew
+- name: Install Homebrew fonts
   community.general.homebrew_cask:
     name: "{{ homebrew_fonts }}"
     state: present
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
+  register: homebrew_fonts_result
+  until: homebrew_fonts_result is successful
+  retries: "{{ default_task_retry }}"
+  delay: "{{ default_task_delay }}"
+  when: has_homebrew and has_homebrew_fonts

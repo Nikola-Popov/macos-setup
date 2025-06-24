@@ -13,8 +13,8 @@ automate:
 - Configuring user environments
 - Managing dotfiles
 
-
 ## 📦 Requirements
+
 The following are one-time actions which are to be executed on the initial use of the repo.
 
 > [!NOTE]
@@ -29,11 +29,13 @@ brew install ansible
 ```
 
 2. Clone the repo
+
 ```bash
 git clone git@github.com:Nikola-Popov/macos-setup.git
 ```
 
-3. Install Ansible required collections 
+3. Install Ansible required collections
+
 ```bash
 cd macos-setup
 ```
@@ -43,6 +45,7 @@ ansible-galaxy install -r collections/requirements.yml
 ```
 
 4. Configure linting via a pre-commit hook
+
 ```bash
 make setup
 ```
@@ -51,6 +54,39 @@ make setup
 
 ```bash
 ansible-playbook playbooks/site.yaml
+```
+
+### 📦 Profile-Based Installation of Homebrew packages
+
+This role installs Homebrew packages and cask applications on macOS based on profile-driven configuration. You can define multiple profiles and selectively enable them to control which packages are installed.
+
+The packages are grouped under named profiles (e.g., `general`, `dev`) in `roles/homebrew/packages.yaml`such as:
+
+```yaml 
+# Example package grouping
+homebrew_package_profiles:
+  general:
+    packages:
+      - eza
+      - neovim
+    cask_packages:
+      - raycast
+
+  dev:
+    packages:
+      - node
+      - helm
+    cask_packages:
+      - docker
+```
+
+Then in `group_vars/all.yaml` you can decive which package group to install by listing them as such:
+
+```yaml
+# Example package group/profile selection
+homebrew_profiles_enabled:
+  - general
+  - dev
 ```
 
 ## ⚙️ Settings
@@ -62,7 +98,7 @@ Manually apply the pre-exported settings (stored in the /settings folder) to the
 
 1. IntelliJ
 
-```
+```text
 Choose File | Manage IDE Settings | Import Settings from the main menu.
 
 In the Import File Location dialog that opens select the desired archive.
@@ -70,8 +106,9 @@ In the Import File Location dialog that opens select the desired archive.
 In the Select Components to Import dialog that opens specify the settings to be imported, and click OK. By default, all settings are selected.
 ```
 
-2. Raycast  
-```
+2. Raycast
+
+```text
 Settings | Advanced | Import
 
 Select the .rayconfig file.

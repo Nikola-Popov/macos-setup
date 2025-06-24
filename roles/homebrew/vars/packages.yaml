@@ -1,31 +1,39 @@
 ---
-homebrew_packages:
-  - helm
-  - pyenv
-  - eza
-  - neovim
-  - zoxide
-  - bat
-  - fd
-  - k9s
-  - node
-  - fzf
-  - kubernetes-cli
-  - oh-my-posh
-  - git-delta
+homebrew_package_profiles:
+  general:
+    packages:
+      - eza
+      - neovim
+      - zoxide
+      - bat
+      - fd
+      - fzf
+      - oh-my-posh
 
-homebrew_cask_packages:
-  - adobe-acrobat-reader
-  - google-chrome
-  - raycast
-  - bruno
-  - intellij-idea-ce
-  - visual-studio-code
-  - docker
-  - ghostty
-  - pycharm-ce
-  - vmware-fusion
-  - pgadmin4
+    cask_packages:
+      - adobe-acrobat-reader
+      - google-chrome
+      - raycast
+      - ghostty
+
+  dev:
+    packages:
+      - kubernetes-cli
+      - k9s
+      - node
+      - helm
+      - pyenv
+      - bruno
+      - intellij-idea-ce
+      - visual-studio-code
+      - docker
+      - git-delta
+      - cloudfoundry-cli
+
+    cask_packages:
+      - pycharm-ce
+      - vmware-fusion
+      - pgadmin4
 
 homebrew_fonts:
   - font-jetbrains-mono
