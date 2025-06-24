@@ -25,6 +25,7 @@ homebrew_cask_packages:
   - ghostty
   - pycharm-ce
   - vmware-fusion
+  - pgadmin4
 
 homebrew_fonts:
   - font-jetbrains-mono
