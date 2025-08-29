@@ -3,12 +3,12 @@
   ansible.builtin.shell: |
     set -eo pipefail
     {{ sdkman_init }} && sdk list java | grep -E '{{ sdkman_sapmachine_java_version }}.*sapmchn' | awk '{ print $NF }' | head -n 1
-  register: sapmachine_java_version
+  register: sdkman_sapmachine_java_version
   changed_when: false
-  failed_when: sapmachine_java_version.rc != 0 or sapmachine_java_version.stdout == ""
+  failed_when: sdkman_sapmachine_java_version.rc != 0 or sdkman_sapmachine_java_version.stdout == ""
 
 - name: Install latest SapMachine Java (e.g. 24.0.1-sapmchn)
   ansible.builtin.shell: |
-    {{ sdkman_init }} && sdk install java {{ sapmachine_java_version.stdout }}
-  when: sapmachine_java_version.stdout != ""
+    {{ sdkman_init }} && sdk install java {{ sdkman_sapmachine_java_version.stdout }}
+  when: sdkman_sapmachine_java_version.stdout != ""
   changed_when: true

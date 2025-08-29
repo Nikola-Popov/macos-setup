@@ -29,11 +29,13 @@ homebrew_package_profiles:
       - docker
       - git-delta
       - cloudfoundry-cli
+      - uv
 
     cask_packages:
       - pycharm-ce
       - vmware-fusion
       - pgadmin4
+      - git-credential-manager
 
 homebrew_fonts:
   - font-jetbrains-mono

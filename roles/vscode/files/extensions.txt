@@ -1,6 +1,6 @@
-ms-python.debugpy
+davidanson.vscode-markdownlint
+github.copilot
 ms-python.python
-ms-python.vscode-pylance
 redhat.ansible
 redhat.vscode-yaml
 sumneko.lua

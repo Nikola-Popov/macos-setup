@@ -1,5 +1,5 @@
 repos:
   - repo: https://github.com/ansible/ansible-lint
-    rev: v25.5.0
+    rev: v25.8.2
     hooks:
       - id: ansible-lint

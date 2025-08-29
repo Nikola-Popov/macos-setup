@@ -18,10 +18,10 @@
 
 - name: Evaluate what needs to be installed
   ansible.builtin.set_fact:
-    has_homebrew: "{{ homebrew_check.stat.exists }}"
-    has_homebrew_packages: "{{ homebrew_packages | length > 0 }}"
-    has_homebrew_cask_packages: "{{ homebrew_cask_packages | length > 0 }}"
-    has_homebrew_fonts: "{{ homebrew_fonts | default([]) | length > 0 }}"
+    homebrew_is_installed: "{{ homebrew_check.stat.exists }}"
+    homebrew_has_packages: "{{ homebrew_packages | length > 0 }}"
+    homebrew_hascask_packages: "{{ homebrew_cask_packages | length > 0 }}"
+    homebrew_hasfonts: "{{ homebrew_fonts | default([]) | length > 0 }}"
 
 - name: Install Homebrew packages
   community.general.homebrew:
@@ -31,7 +31,7 @@
   until: homebrew_packages_result is successful
   retries: "{{ default_task_retry }}"
   delay: "{{ default_task_delay }}"
-  when: has_homebrew and has_homebrew_packages
+  when: homebrew_is_installed and homebrew_has_packages
 
 - name: Install Homebrew cask packages
   community.general.homebrew_cask:
@@ -41,7 +41,7 @@
   until: homebrew_cask_result is successful
   retries: "{{ default_task_retry }}"
   delay: "{{ default_task_delay }}"
-  when: has_homebrew and has_homebrew_cask_packages
+  when: homebrew_is_installed and homebrew_hascask_packages
 
 - name: Install Homebrew fonts
   community.general.homebrew_cask:
@@ -51,4 +51,4 @@
   until: homebrew_fonts_result is successful
   retries: "{{ default_task_retry }}"
   delay: "{{ default_task_delay }}"
-  when: has_homebrew and has_homebrew_fonts
+  when: homebrew_is_installed and homebrew_hasfonts
