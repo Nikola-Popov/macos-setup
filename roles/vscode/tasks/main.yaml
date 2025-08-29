@@ -2,7 +2,7 @@
 - name: Install extensions
   ansible.builtin.shell: |
     while read ext; do
-      code --install-extension --force "$ext"
+      code --install-extension "$ext" --force
     done < {{ role_path }}/files/extensions.txt
   changed_when: false
 
