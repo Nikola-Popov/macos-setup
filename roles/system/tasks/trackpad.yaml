@@ -18,8 +18,8 @@
 
     - name: Disable most of trackpad gestures
       community.general.osx_defaults:
-        domain: "{{ item.domain }}"
-        key: "{{ item.key }}"
+        domain: "{{ gesture.domain }}"
+        key: "{{ gesture.key }}"
         type: int
         value: 0
       loop:
@@ -33,3 +33,5 @@
           key: "TrackpadFourFingerVertSwipeGesture"
         - domain: "com.apple.AppleMultitouchTrackpad"
           key: "TrackpadFourFingerPinchGesture"
+      loop_control:
+        loop_var: gesture
