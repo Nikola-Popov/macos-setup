@@ -7,7 +7,7 @@
     - zsh
     - oh_my_zsh
     - oh_my_posh
-    # - nvim
+    - nvim
     - ghostty
     - sdkman
     - vscode

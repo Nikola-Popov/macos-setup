@@ -51,7 +51,7 @@ Prepare the environment with these one-time actions.
 # clone the project and navigate to it
 git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
 
-# install dependencies (i.e. Ansible communicty collections)
+# install dependencies (i.e. Ansible community collections)
 ansible-galaxy install -r collections/requirements.yml
 ```
 
