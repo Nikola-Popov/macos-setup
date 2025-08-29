@@ -1,8 +1,13 @@
-# 🛠️ dotfiles & system setup with Ansible
+# 🏗️ dotfiles & system setup with Ansible
 
 ## ✨ Overview
 
-Fully automated solution for configuring and personalizing your macOS environment using [Ansible](https://www.ansible.com/). It streamlines the installation of essential tools, dotfiles, system settings, and developer utilities, making your Mac ready for productivity in minutes.
+Fully automated solution for configuring and personalizing your macOS environment using [Ansible](https://www.ansible.com/).
+
+It streamlines the installation of essential tools, dotfiles, system settings, and developer utilities, making your Mac ready for productivity in minutes.
+
+> [!WARNING]
+> Supported Operating System - `MacOS`
 
 ### 🤔 Why Ansible?
 
@@ -26,47 +31,44 @@ automate:
 - **Shell Enhancements**: Sets up Oh My Zsh, Oh My Posh, aliases, and utilities.
 - **Modular Roles**: Easily extend or customize with Ansible roles for each component.
 
-## ▶️ Usage
+---
+
+## ⚡ Usage
+
+```bash
+ansible-pull \
+  -U http://github.com/Nikola-Popov/macos-setup \
+  -d ~/.ansible/pull/macos-setup \
+  -c ~/.ansible/pull/macos-setup/ansible.cfg \
+  playbooks/site.yaml
+```
+
+## 🛠️ Local setup
+
+Prepare the environment with these one-time actions.
+
+```bash
+# clone the project and navigate to it
+git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
+
+# install dependencies (i.e. Ansible communicty collections)
+ansible-galaxy install -r collections/requirements.yml
+```
+
+Run the playbook:
 
 ```bash
 ansible-playbook playbooks/site.yaml
 ```
 
-## 📋 Prerequisites
-
-The following are one-time actions which are to be executed on the initial use of the repo.
-
-> [!NOTE]
-> Supported Operating System - `MacOS`
-
-### ⚡ Quick Setups
-
-1. Clone the repo
-
-```bash
-git clone git@github.com:Nikola-Popov/macos-setup.git
-```
-
-2. Install [`Ansible`](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
-```bash
-brew install ansible
-```
-
-3. Install Ansible required collections
-
-```bash
-cd macos-setup
-
-ansible-galaxy install -r collections/requirements.yml
-```
+---
 
 ## 📝 Additional manual settings
 
-> [!NOTE]
-> This relies on the playbook is executed at least once. Refer to the [Usage](#usage) section to see how.
+There are steps which cannot be automated completely. Therefore, manually apply the pre-exported settings (stored in the /settings folder) to their respective tools.
 
-Manually apply the pre-exported settings (stored in the /settings folder) to their respective tools.
+> [!NOTE]
+> This relies on the playbook is executed at least once. Refer to the '▶️ Usage' section to see how.
 
 ### 💻 IntelliJ
 
@@ -114,7 +116,7 @@ This command will:
 - Edit `inventory/group_vars/all.yaml` for global settings
 - Add or modify roles in `roles/` to suit your workflow. Create a new role in `roles/`, add your tasks, and include it in `playbooks/site.yaml`
 
-### 🏗️ Profile-Based Installation of Homebrew packages
+### 📦 Profile-Based Installation of Homebrew packages
 
 This role installs Homebrew packages and cask applications on macOS based on profile-driven configuration. You can define multiple profiles and selectively enable them to control which packages are installed.
 
