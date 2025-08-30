@@ -4,12 +4,12 @@
 
   pre_tasks:
     - name: Create various folders
-      ansible.builtin.import_tasks: ../pre_tasks/create_folders.yaml
+      ansible.builtin.import_tasks: ../pre_tasks/create_folders.yml
       tags:
         - always
 
     - name: Ensure Homebrew is installed
-      ansible.builtin.import_tasks: ../pre_tasks/ensure_homebrew.yaml
+      ansible.builtin.import_tasks: ../pre_tasks/ensure_homebrew.yml
       tags:
         - always
 

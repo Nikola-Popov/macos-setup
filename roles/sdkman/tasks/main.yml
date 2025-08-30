@@ -30,7 +30,7 @@
   when: not sdkman_init_script.stat.exists or sdkman_init_script.stat.size == 0
 
 - name: Install Java
-  ansible.builtin.import_tasks: java.yaml
+  ansible.builtin.import_tasks: java.yml
 
 - name: Install Maven
-  ansible.builtin.import_tasks: maven.yaml
+  ansible.builtin.import_tasks: maven.yml

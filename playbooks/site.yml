@@ -1,0 +1,6 @@
+---
+- name: Configure the system
+  import_playbook: configure_system.yml
+
+- name: Configure tools, dotfiles, and install runtimes
+  import_playbook: configure_tools_and_runtimes.yml

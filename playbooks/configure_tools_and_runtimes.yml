@@ -1,5 +1,5 @@
 ---
-- name: Configure dotfiles for individual tools
+- name: Configure tools, dotfiles, and install runtimes
   hosts: local
 
   roles:

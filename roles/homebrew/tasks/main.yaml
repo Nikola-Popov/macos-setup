@@ -1,9 +1,0 @@
----
-- name: Update Homebrew and all packages
-  ansible.builtin.import_tasks: update_brew.yaml
-
-- name: Include brew packages vars
-  ansible.builtin.include_vars: packages.yaml
-
-- name: Install required packages
-  ansible.builtin.import_tasks: install_packages.yaml

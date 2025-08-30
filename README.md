@@ -170,6 +170,8 @@ You can find the extension identifier on the extension's page in the VS Code Mar
 
 To install a new extension, simply add its identifier to `extensions.txt` and re-run the playbook. The setup will automatically install all listed extensions for you.
 
+---
+
 ## 📜 License
 
 This project is licensed under the MIT License.  
