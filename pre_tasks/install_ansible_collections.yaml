@@ -1,4 +1,0 @@
----
-- name: Install Galaxy collections
-  ansible.builtin.command:
-    cmd: ansible-galaxy collection install -r ../collections/requirements.yml

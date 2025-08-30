@@ -6,6 +6,6 @@
 
 - name: Fail if Homebrew is not installed
   fail:
-    msg: Homebrew is missing...Install from http://brew.sh/
+    msg: Homebrew is missing...Install it from http://brew.sh/
   when:
     - not homebrew_check.stat.exists

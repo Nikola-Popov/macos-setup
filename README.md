@@ -36,7 +36,8 @@ automate:
 ## ⚡ Usage
 
 ```bash
-ansible-pull \
+ansible-galaxy collection install community.general \
+&& ansible-pull \
   -U http://github.com/Nikola-Popov/macos-setup \
   -d ~/.ansible/pull/macos-setup \
   -c ~/.ansible/pull/macos-setup/ansible.cfg \
@@ -52,7 +53,7 @@ Prepare the environment with these one-time actions.
 git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
 
 # install dependencies (i.e. Ansible community collections)
-ansible-galaxy install -r collections/requirements.yml
+ansible-galaxy collection install community.general
 ```
 
 Run the playbook:
