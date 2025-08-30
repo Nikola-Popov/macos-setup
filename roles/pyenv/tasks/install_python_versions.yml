@@ -1,0 +1,20 @@
+---
+- name: Get installed pyenv versions
+  ansible.builtin.command: "pyenv versions --bare"
+  register: pyenv_installed_versions_raw
+  changed_when: false
+
+- name: Filter installed versions matching semantic version regex
+  ansible.builtin.set_fact:
+    pyenv_installed_versions: "{{ pyenv_installed_versions_raw.stdout_lines | select('match', pyenv_semver_regex) | list }}"
+
+- name: Compute versions to install
+  ansible.builtin.set_fact:
+    pyenv_versions_to_install: "{{ pyenv_python_versions | difference(pyenv_installed_versions) }}"
+
+- name: Install required Python versions with pyenv
+  ansible.builtin.command: "pyenv install {{ item }}"
+  loop: "{{ pyenv_versions_to_install }}"
+  register: pyenv_install_results
+  when: pyenv_versions_to_install | length > 0
+  changed_when: pyenv_install_results is changed

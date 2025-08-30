@@ -1,0 +1,4 @@
+pyenv_python_versions:
+  - 3.11.11
+
+pyenv_global_version: 3.11.11

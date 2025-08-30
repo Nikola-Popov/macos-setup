@@ -1,0 +1,25 @@
+---
+- name: Check if requested pyenv versions are valid
+  ansible.builtin.set_fact:
+    pyenv_versions_valid: >-
+      {{
+        pyenv_python_versions is defined
+        and pyenv_python_versions | length > 0
+        and (pyenv_python_versions
+             | select('match', pyenv_semver_regex)
+             | list
+             | length
+             == pyenv_python_versions | length)
+      }}
+
+- name: Install requested Python versions
+  ansible.builtin.include_tasks: install_python_versions.yml
+  when: pyenv_versions_valid
+
+- name: Set pyenv global version
+  ansible.builtin.command: "pyenv global {{ pyenv_global_version }}"
+  when:
+    - pyenv_global_version is defined
+    - pyenv_global_version | length > 0
+    - pyenv_global_version is match(pyenv_semver_regex)
+  changed_when: false

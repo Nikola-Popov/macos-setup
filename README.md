@@ -33,7 +33,7 @@ automate:
 
 ---
 
-## ⚡ Usage
+## ⚡ Quick Usage
 
 ```bash
 ansible-galaxy collection install community.general \
@@ -44,7 +44,7 @@ ansible-galaxy collection install community.general \
   playbooks/site.yaml
 ```
 
-## 🛠️ Local setup
+## 🛠️ Local Setup
 
 Prepare the environment with these one-time actions.
 
@@ -64,7 +64,7 @@ ansible-playbook playbooks/site.yaml
 
 ---
 
-## 📝 Additional manual settings
+## 📝 Post-Setup Manual Actions
 
 There are steps which cannot be automated completely. Therefore, manually apply the pre-exported settings (stored in the /settings folder) to their respective tools.
 
@@ -110,14 +110,24 @@ This command will:
 
 4. Once authenticated, Git will automatically use these stored credentials for future operations (such as git clone, git pull, and git push) without asking for your password again.
 
-## 🧩 Extending & Customization
+---
 
-### 🗒️ Overview
+## 🧑‍💻 Development
+
+### 🪛 Creating Ansible role
+
+```bash
+ansible-galaxy init roles/<rolename>
+```
+
+### 🧩 Extending & Customization
+
+#### 🗒️ Overview
 
 - Edit `inventory/group_vars/all.yaml` for global settings
 - Add or modify roles in `roles/` to suit your workflow. Create a new role in `roles/`, add your tasks, and include it in `playbooks/site.yaml`
 
-### 📦 Profile-Based Installation of Homebrew packages
+#### 📦 Profile-Based Installation of Homebrew packages
 
 This role installs Homebrew packages and cask applications on macOS based on profile-driven configuration. You can define multiple profiles and selectively enable them to control which packages are installed.
 
@@ -150,7 +160,7 @@ homebrew_profiles_enabled:
   - dev
 ```
 
-### 🧩 Install VS Code Extensions
+#### 🧩 Install VS Code Extensions
 
 All VS Code extensions required for this setup are listed in `roles/vscode/files/extensions.txt`. Each line in this file is the unique identifier for a VS Code extension (for example, `ms-python.python`).
 
@@ -159,3 +169,8 @@ You can find the extension identifier on the extension's page in the VS Code Mar
 ![VS Code Extensions](docs/images/vs-code-id.png)
 
 To install a new extension, simply add its identifier to `extensions.txt` and re-run the playbook. The setup will automatically install all listed extensions for you.
+
+## 📜 License
+
+This project is licensed under the MIT License.  
+You are free to use, modify, and distribute this software with proper attribution. See the [MIT License](LICENSE) file for full details.
