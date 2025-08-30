@@ -1,2 +1,3 @@
 sdkman_init: '. "$HOME/.sdkman/bin/sdkman-init.sh"'
 sdkman_installer_path: /tmp/sdkman-install.sh
+sdkman_repository: https://get.sdkman.io

@@ -1,8 +1,8 @@
-# 🏗️ dotfiles & system setup with Ansible
+# 🏗️ Automated Tools & Environment Management for macOS
 
 ## ✨ Overview
 
-Fully automated solution for configuring and personalizing your macOS environment using [Ansible](https://www.ansible.com/).
+(Almost) fully automated solution for configuring and personalizing your macOS environment using [Ansible](https://www.ansible.com/).
 
 It streamlines the installation of essential tools, dotfiles, system settings, and developer utilities, making your Mac ready for productivity in minutes.
 
@@ -41,35 +41,74 @@ ansible-galaxy collection install community.general \
   -U http://github.com/Nikola-Popov/macos-setup \
   -d ~/.ansible/pull/macos-setup \
   -c ~/.ansible/pull/macos-setup/ansible.cfg \
-  playbooks/site.yaml
+  playbooks/site.yml
 ```
 
-## 🛠️ Local Setup
+### ⚙️ Dynamic Configuration (Extra Vars)
 
-Prepare the environment with these one-time actions.
+Below is a list of all variables you can modify at runtime to customize your setup.
 
-```bash
-# clone the project and navigate to it
-git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
+| Variable                | Type     | Example Value                      | Description                                               |
+|-------------------------|----------|------------------------------------|-----------------------------------------------------------|
+| `git_name`              | string   | `git_name='Your Name'`             | Sets your global Git user name                            |
+| `git_email`             | string   | `git_email=user@example.com`       | Sets your global Git email address                        |
+| `pyenv_global_version`  | string   | `pyenv_global_version=3.11.6`      | Sets the global Python version for pyenv                  |
+| `pyenv_python_versions` | list     | `pyenv_python_versions=['3.11.6','3.12.2']` | List of Python versions to install with pyenv             |
+| `sdkman_sapmachine_java_version` | integer   | `sdkman_sapmachine_java_version=17` | Sets the SAP Machine Java version with SDKMAN            |
+| `workspace_dir`         | string   | `workspace_dir=/Users/me/workspace` | Sets your workspace directory                        |
 
-# install dependencies (i.e. Ansible community collections)
-ansible-galaxy collection install community.general
-```
+#### Examples
 
-Run the playbook:
+You can customize your setup by passing variables to Ansible using the `-e` flag.  
+This lets you set values directly (like `key=value`), or load them from a JSON or YAML file (using `@filename`).  
+You can use `-e` as many times as you need in one command.
 
-```bash
-ansible-playbook playbooks/site.yaml
-```
+1. Pass variables directly with `-e`:
+
+   ```bash
+   ansible-pull \
+     ...
+     -e "git_name='Your Name' pyenv_global_version=3.11.6 workspace_dir=/Users/me/workspace" \
+     playbooks/site.yml
+   ```
+
+   or
+
+    ```bash
+   ansible-pull \
+     ...
+     -e "git_name='Your Name'" \
+     -e "pyenv_global_version=3.11.6" \
+     -e "workspace_dir=/Users/me/workspace" \
+     playbooks/site.yml
+   ```
+
+2. Create a YAML file (e.g. `myvars.yml`) with your variables:
+  Store your configuration in a file for easy reuse and sharing.
+
+   ```yml
+   git_name: "Your Name"
+   pyenv_global_version: "3.11.6"
+   workspace_dir: "/Users/me/workspace"
+   ```
+
+   Then run:
+
+   ```bash
+   ansible-pull \
+     ...
+     -e @myvars.yml \
+     playbooks/site.yml
+   ```
 
 ---
 
-## 📝 Post-Setup Manual Actions
+## 📝 Additional Post-Setup Manual Actions
 
 There are steps which cannot be automated completely. Therefore, manually apply the pre-exported settings (stored in the /settings folder) to their respective tools.
 
 > [!NOTE]
-> This relies on the playbook is executed at least once. Refer to the '▶️ Usage' section to see how.
+> This relies on the playbook is executed at least once. Refer to the '⚡ Quick Usage' or '🛠️ Local Setup' sections to see how.
 
 ### 💻 IntelliJ
 
@@ -114,26 +153,43 @@ This command will:
 
 ## 🧑‍💻 Development
 
-### 🪛 Creating Ansible role
+### 🛠️ Local Setup
+
+Prepare the environment with these one-time actions.
+
+```bash
+# clone the project and navigate to it
+git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
+
+# install dependencies (i.e. Ansible community collections)
+ansible-galaxy collection install community.general
+```
+
+Run the playbook:
+
+```bash
+ansible-playbook playbooks/site.yml
+```
+
+### 🧩 Extending & Customization
+
+#### 🪛 New workflows
+
+Add or modify roles in `roles/` to suit your workflow. Create a new role in `roles/` by:
 
 ```bash
 ansible-galaxy init roles/<rolename>
 ```
 
-### 🧩 Extending & Customization
-
-#### 🗒️ Overview
-
-- Edit `inventory/group_vars/all.yaml` for global settings
-- Add or modify roles in `roles/` to suit your workflow. Create a new role in `roles/`, add your tasks, and include it in `playbooks/site.yaml`
+Later, include the role in one of the playbooks in `playbooks/`, so that it's picked-up and executed by Ansible.
 
 #### 📦 Profile-Based Installation of Homebrew packages
 
 This role installs Homebrew packages and cask applications on macOS based on profile-driven configuration. You can define multiple profiles and selectively enable them to control which packages are installed.
 
-The packages are grouped under named profiles (e.g., `general`, `dev`) in `roles/homebrew/packages.yaml`such as:
+The packages are grouped under named profiles (e.g., `general`, `dev`) in `roles/homebrew/packages.yml`such as:
 
-```yaml
+```yml
 # Example package grouping
 homebrew_package_profiles:
   general:
@@ -151,9 +207,9 @@ homebrew_package_profiles:
       - docker
 ```
 
-Then in `group_vars/all.yaml` you can decive which package group to install by listing them as such:
+Then in `group_vars/all.yml` you can decive which package group to install by listing them as such:
 
-```yaml
+```yml
 # Example package group/profile selection
 homebrew_profiles_enabled:
   - general
