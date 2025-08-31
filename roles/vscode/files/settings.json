@@ -9,7 +9,15 @@
     "editor.scrollbar.verticalScrollbarSize": 3,
     "editor.fontFamily": "'JetBrains Mono NL', Menlo, Monaco, 'Courier New', monospace",
     "editor.guides.bracketPairs": true,
-    "workbench.activityBar.location": "top",
     "editor.fontSize": 11,
-    "ansible.lightspeed.suggestions.enabled": false
+    "ansible.lightspeed.suggestions.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "extensions.experimental.issueQuickAccess": false,
+    "workbench.activityBar.location": "top",
+    "explorer.excludeGitIgnore": true,
+    "terminal.external.osxExec": "Ghostty.app",
+    "telemetry.editStats.enabled": false,
+    "telemetry.feedback.enabled": false,
+    "ansible.lightspeed.enabled": false,
+    "github.copilot.chat.agent.thinkingTool": true
 }
