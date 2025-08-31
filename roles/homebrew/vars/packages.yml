@@ -31,6 +31,7 @@ homebrew_package_profiles:
       - git-delta
       - cloudfoundry-cli
       - uv
+      - shellcheck
 
     cask_packages:
       - pycharm-ce

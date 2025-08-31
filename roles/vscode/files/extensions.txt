@@ -4,3 +4,4 @@ ms-python.python
 redhat.ansible
 redhat.vscode-yaml
 sumneko.lua
+timonwong.shellcheck
