@@ -10,4 +10,4 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/settings.json"
     dest: "{{ macos_app_folder }}/Code/User"
-    mode: '0644'
+    mode: "0644"

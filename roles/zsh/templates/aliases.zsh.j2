@@ -9,7 +9,17 @@ alias cat='bat --paging=never --style=plain'
 alias less='bat --style=numbers'
 
 #fzf
-alias f="fzf -m --prompt='▶ ' --pointer='→ ' --marker='♡ '"
+alias f='fzf -m \
+  --prompt="▶ " \
+  --pointer="→ " \
+  --marker="♡ " \
+  --preview "fold -w $FZF_PREVIEW_COLUMNS {}" \
+  --preview-window=right:60% \
+  --height 75% \
+  --border top \
+  --color "preview-bg:#223344,border:#778899" \
+  --style minimal \
+  --bind "y:execute(cat {} | pbcopy)+abort"'
 alias fv='vim $(f)'
 alias fc='cat $(f)'
 
@@ -27,8 +37,17 @@ alias dw='cd ~/Downloads'
 # vim
 alias vim='nvim'
 
+# ripgrep
+alias rg='rg --smart-case'
+alias rga='grep --no-ignore'
+
+# fd
+alias fd='fd --hidden --follow'
+
 # config
 alias aliases='vim $ZSH_CUSTOM/aliases.zsh'
 alias zshconf='vim ~/.zshrc'
 
+# git
 alias gp='git push origin HEAD:refs/for/"$(git_current_branch)"'
+alias gb='git branch -v'

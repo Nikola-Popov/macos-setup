@@ -3,22 +3,22 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/.zshrc"
     dest: "{{ ansible_user_dir }}"
-    mode: '0644'
+    mode: "0644"
 
 - name: Create .aliases.zsh from a template and move it to {{ zsh_custom_path }}
   ansible.builtin.template:
     src: aliases.zsh.j2
     dest: "{{ zsh_custom_path }}/aliases.zsh"
-    mode: '0644'
+    mode: "0644"
 
 - name: Copy utilities.zsh to {{ zsh_custom_path }}
   ansible.builtin.copy:
     src: "{{ role_path }}/files/utilities.zsh"
     dest: "{{ zsh_custom_path }}"
-    mode: '0644'
+    mode: "0644"
 
 - name: Suppress login messages when a user logs in to a shell session by creating the '$HOME/.hushlogin' file
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.hushlogin"
     state: touch
-    mode: '0644'
+    mode: "0644"

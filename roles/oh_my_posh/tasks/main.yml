@@ -9,4 +9,4 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/custom_oh_my_posh_theme.omp.json"
     dest: "{{ oh_my_posh_theme_dir }}"
-    mode: '0644'
+    mode: "0644"

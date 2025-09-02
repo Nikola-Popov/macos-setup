@@ -14,7 +14,7 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files"
     dest: "{{ config_dir }}/nvim"
-    mode: '0644'
+    mode: "0644"
 
 - name: Trigger plugins sync
   ansible.builtin.command: nvim --headless "+Lazy! sync" +qa

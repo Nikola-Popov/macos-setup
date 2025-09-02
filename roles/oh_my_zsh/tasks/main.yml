@@ -1,3 +1,4 @@
+---
 - name: Ensure Zsh is installed
   ansible.builtin.package:
     name: zsh

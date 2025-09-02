@@ -3,7 +3,7 @@
   ansible.builtin.copy:
     src: "{{ role_path }}/files/config"
     dest: "{{ macos_app_folder }}/com.mitchellh.ghostty"
-    mode: '0644'
+    mode: "0644"
 
 - name: Configure SSH to fall back to a known terminfo entry
   ansible.builtin.blockinfile:

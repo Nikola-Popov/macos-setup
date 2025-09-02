@@ -9,6 +9,7 @@ homebrew_package_profiles:
       - fd
       - fzf
       - oh-my-posh
+      - ripgrep
 
     cask_packages:
       - adobe-acrobat-reader

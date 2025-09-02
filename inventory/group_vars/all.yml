@@ -1,7 +1,7 @@
 ---
 config_dir: "{{ ansible_user_dir }}/.config"
 workspace_dir: "/Users/{{ ansible_user_id }}/workspace"
-macos_app_folder: "{{ ansible_user_dir }}/Library/Application\ Support"
+macos_app_folder: "{{ ansible_user_dir }}/Library/Application Support"
 default_task_retry: 3
 default_task_delay: 2
 homebrew_profiles_enabled:

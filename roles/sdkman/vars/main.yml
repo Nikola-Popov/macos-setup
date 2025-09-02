@@ -1,3 +1,5 @@
-sdkman_init: '. "$HOME/.sdkman/bin/sdkman-init.sh"'
+---
+sdkman_init_path: "{{ ansible_user_dir }}/.sdkman/bin/sdkman-init.sh"
+sdkman_init: '. "{{ sdkman_init_path }}"'
 sdkman_installer_path: /tmp/sdkman-install.sh
 sdkman_repository: https://get.sdkman.io
