@@ -33,6 +33,7 @@ homebrew_package_profiles:
       - cloudfoundry-cli
       - uv
       - shellcheck
+      - mcp-inspector
 
     cask_packages:
       - pycharm-ce
