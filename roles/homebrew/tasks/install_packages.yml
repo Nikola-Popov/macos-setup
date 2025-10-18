@@ -29,8 +29,8 @@
     state: present
   register: homebrew_packages_result
   until: homebrew_packages_result is successful
-  retries: "{{ default_task_retry }}"
-  delay: "{{ default_task_delay }}"
+  retries: "{{ homebrew_default_task_retry }}"
+  delay: "{{ homebrew_default_task_delay }}"
   when: homebrew_is_installed and homebrew_has_packages
 
 - name: Install Homebrew cask packages
@@ -39,8 +39,8 @@
     state: present
   register: homebrew_cask_result
   until: homebrew_cask_result is successful
-  retries: "{{ default_task_retry }}"
-  delay: "{{ default_task_delay }}"
+  retries: "{{ homebrew_default_task_retry }}"
+  delay: "{{ homebrew_default_task_delay }}"
   when: homebrew_is_installed and homebrew_hascask_packages
 
 - name: Install Homebrew fonts
@@ -49,6 +49,6 @@
     state: present
   register: homebrew_fonts_result
   until: homebrew_fonts_result is successful
-  retries: "{{ default_task_retry }}"
-  delay: "{{ default_task_delay }}"
+  retries: "{{ homebrew_default_task_retry }}"
+  delay: "{{ homebrew_default_task_delay }}"
   when: homebrew_is_installed and homebrew_hasfonts
