@@ -112,10 +112,9 @@ export pyenv_root="$home/.pyenv"
 [[ -d $pyenv_root/bin ]] && export path="$pyenv_root/bin:$path"
 eval "$(pyenv init - zsh)"
 
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/custom_oh_my_posh_theme.omp.json)"
-eval "$(oh-my-posh init zsh)"
-
 eval "$(zoxide init zsh --cmd cd)"
+
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/custom_oh_my_posh_theme.omp.json)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

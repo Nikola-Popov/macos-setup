@@ -1,4 +1,8 @@
 ---
+- name: Upgrade Oh My Posh to the latest version
+  ansible.builtin.command: oh-my-posh upgrade
+  changed_when: false
+
 - name: Create if needed the {{ oh_my_posh_theme_dir }}
   ansible.builtin.file:
     path: "{{ oh_my_posh_theme_dir }}"
