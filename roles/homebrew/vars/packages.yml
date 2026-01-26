@@ -16,7 +16,7 @@ homebrew_package_profiles:
       - google-chrome
       - raycast
       - ghostty
-      - chatgpt
+      - alt-tab
 
   dev:
     packages:
@@ -33,7 +33,7 @@ homebrew_package_profiles:
       - cloudfoundry-cli
       - uv
       - shellcheck
-      - mcp-inspector
+      - kubelogin
 
     cask_packages:
       - pycharm-ce
