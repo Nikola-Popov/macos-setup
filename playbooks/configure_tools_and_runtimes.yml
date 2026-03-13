@@ -2,6 +2,17 @@
 - name: Configure tools, dotfiles, and install runtimes
   hosts: local
 
+  vars_prompt:
+    - name: git_name
+      prompt: "Enter your Git name"
+      default: "{{ lookup('env', 'GIT_AUTHOR_NAME') | default('Your Name', true) }}"
+      private: false
+
+    - name: git_email
+      prompt: "Enter your Git email"
+      default: "{{ lookup('env', 'GIT_AUTHOR_EMAIL') | default('you@example.com', true) }}"
+      private: false
+
   roles:
     - git
     - zsh

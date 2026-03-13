@@ -50,12 +50,27 @@ Below is a list of all variables you can modify at runtime to customize your set
 
 | Variable                | Type     | Example Value                      | Description                                               |
 |-------------------------|----------|------------------------------------|-----------------------------------------------------------|
-| `git_name`              | string   | `git_name='Your Name'`             | Sets your global Git user name                            |
-| `git_email`             | string   | `git_email=user@example.com`       | Sets your global Git email address                        |
+| `git_name`              | string   | `git_name='Your Name'`             | Sets your global Git user name (prompted interactively)   |
+| `git_email`             | string   | `git_email=user@example.com`       | Sets your global Git email address (prompted interactively) |
 | `pyenv_global_version`  | string   | `pyenv_global_version=3.11.6`      | Sets the global Python version for pyenv                  |
 | `pyenv_python_versions` | list     | `pyenv_python_versions=['3.11.6','3.12.2']` | List of Python versions to install with pyenv             |
 | `sdkman_sapmachine_java_version` | integer   | `sdkman_sapmachine_java_version=17` | Sets the SAP Machine Java version with SDKMAN            |
 | `workspace_dir`         | string   | `workspace_dir=/Users/me/workspace` | Sets your workspace directory                        |
+
+#### Git Credentials
+
+The playbook will **prompt interactively** for `git_name` and `git_email`. You can provide them in three ways:
+
+1. **Interactive**: Answer the prompts when running the playbook
+2. **Environment variables**: Set `GIT_AUTHOR_NAME` and `GIT_AUTHOR_EMAIL` before running
+
+```bash
+# Option 2: Using environment variables
+export GIT_AUTHOR_NAME="Your Name"
+export GIT_AUTHOR_EMAIL="you@example.com"
+```
+
+3. **Extra vars**: Pass `-e "git_name='Your Name' git_email='you@example.com'"`
 
 #### Examples
 

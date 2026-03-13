@@ -15,7 +15,7 @@
   ansible.builtin.blockinfile:
     path: "{{ ansible_user_dir }}/.ssh/config"
     create: true
-    mode: "0644"
+    mode: "0600"
     marker: "# {mark} ANSIBLE MANAGED BLOCK - TERM config"
     block: |
       Host *

@@ -1,6 +1,6 @@
 ---
 - name: Ensure Zsh is installed
-  ansible.builtin.package:
+  community.general.homebrew:
     name: zsh
     state: present
 

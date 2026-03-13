@@ -1,6 +1,6 @@
 ---
 - name: Ensure nvim is installed
-  ansible.builtin.package:
+  community.general.homebrew:
     name: neovim
     state: present
 
@@ -12,7 +12,7 @@
 
 - name: Copy files to nvim directory in {{ config_dir }}
   ansible.builtin.copy:
-    src: "{{ role_path }}/files"
+    src: "{{ role_path }}/files/"
     dest: "{{ config_dir }}/nvim"
     mode: "0644"
 
