@@ -6,3 +6,4 @@ redhat.vscode-yaml
 sumneko.lua
 timonwong.shellcheck
 saoudrizwan.claude-dev
+anthropic.claude-code

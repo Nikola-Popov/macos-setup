@@ -34,6 +34,7 @@ homebrew_package_profiles:
       - uv
       - shellcheck
       - kubelogin
+      - btop
 
     cask_packages:
       - pycharm-ce
