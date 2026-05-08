@@ -14,5 +14,5 @@
         - always
 
   roles:
-    - system
-    - homebrew
+    - { role: system, tags: [system] }
+    - { role: homebrew, tags: [homebrew] }

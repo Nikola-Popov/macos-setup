@@ -1,5 +1,0 @@
----
-system_services:
-  dock: Dock
-  finder: Finder
-  systemuiserver: SystemUIServer

@@ -1,0 +1,11 @@
+---
+vscode_extensions:
+  - davidanson.vscode-markdownlint
+  - github.copilot
+  - ms-python.python
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - sumneko.lua
+  - timonwong.shellcheck
+  - saoudrizwan.claude-dev
+  - anthropic.claude-code

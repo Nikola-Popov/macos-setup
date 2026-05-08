@@ -1,0 +1,6 @@
+---
+claude_skills:
+  - registry: https://github.com/anthropics/skills
+    skill: pptx
+  - registry: https://github.com/vercel-labs/skills
+    skill: find-skills

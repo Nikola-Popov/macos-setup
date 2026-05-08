@@ -6,3 +6,4 @@ macos_app_folder: "{{ ansible_user_dir }}/Library/Application Support"
 homebrew_profiles_enabled:
   - general
   - dev
+  - work

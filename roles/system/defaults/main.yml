@@ -1,0 +1,13 @@
+---
+system_dock_icon_size: 40.0
+system_dock_minimize_effect: "scale"
+system_dock_show_recents: false
+
+system_mouse_tracking_speed: 2.0
+
+system_trackpad_tracking_speed: 2.0
+system_trackpad_natural_scroll: false
+
+system_software_update_check: true
+system_software_update_download: false
+system_software_update_install_macos: false

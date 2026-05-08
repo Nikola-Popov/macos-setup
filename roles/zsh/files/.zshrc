@@ -108,8 +108,8 @@ source $ZSH/oh-my-zsh.sh
 
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
 
-export pyenv_root="$home/.pyenv"
-[[ -d $pyenv_root/bin ]] && export path="$pyenv_root/bin:$path"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
 eval "$(zoxide init zsh --cmd cd)"

@@ -1,20 +1,20 @@
 ---
-- name: Apply macOS Finder settings
-  notify: "Restart {{ system_services.systemuiserver }}"
+- name: Apply macOS trackpad settings
+  notify: Restart SystemUIServer
   block:
-    - name: Hide recent applications from the Dock
+    - name: Set natural scroll direction
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: com.apple.swipescrolldirection
         type: bool
-        value: false
+        value: "{{ system_trackpad_natural_scroll }}"
 
-    - name: Set trackpad tracking speed to 2.0
+    - name: Set trackpad tracking speed to {{ system_trackpad_tracking_speed }}
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: com.apple.trackpad.scaling
         type: float
-        value: 2.0
+        value: "{{ system_trackpad_tracking_speed }}"
 
     - name: Disable most of trackpad gestures
       community.general.osx_defaults:

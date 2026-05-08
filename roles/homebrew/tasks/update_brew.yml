@@ -10,4 +10,6 @@
     install_options: force
   register: homebrew_upgrade_result
   until: homebrew_upgrade_result is successful
-  when: homebrew_check.stat.exists
+  when:
+    - homebrew_check.stat.exists
+    - homebrew_upgrade_enabled | bool

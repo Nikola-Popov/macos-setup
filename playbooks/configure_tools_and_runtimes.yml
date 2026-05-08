@@ -14,13 +14,14 @@
       private: false
 
   roles:
-    - git
-    - zsh
-    - oh_my_zsh
-    - oh_my_posh
-    - nvim
-    - ghostty
-    - sdkman
-    - vscode
-    - pyenv
-    - btop
+    - { role: git, tags: [git] }
+    - { role: zsh, tags: [zsh] }
+    - { role: oh_my_zsh, tags: [oh_my_zsh, zsh] }
+    - { role: oh_my_posh, tags: [oh_my_posh, zsh] }
+    - { role: nvim, tags: [nvim] }
+    - { role: ghostty, tags: [ghostty] }
+    - { role: sdkman, tags: [sdkman, java] }
+    - { role: vscode, tags: [vscode] }
+    - { role: pyenv, tags: [pyenv, python] }
+    - { role: btop, tags: [btop] }
+    - { role: claude, tags: [claude] }

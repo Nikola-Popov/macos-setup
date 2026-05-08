@@ -9,4 +9,4 @@
   ansible.builtin.shell: |
     {{ sdkman_init }} && sdk install maven
   when: sdkman_maven_check.rc != 0
-  changed_when: true
+  changed_when: sdkman_maven_check.rc != 0

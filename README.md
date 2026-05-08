@@ -26,36 +26,37 @@ automate:
 
 - **Homebrew & Package Management**: Installs and updates Homebrew, plus your favorite CLI and GUI apps.
 - **Dotfiles & Configs**: Deploys custom dotfiles for zsh, nvim, git, and more.
-- **System Tweaks**: Automates macOS settings (Dock, Finder, keyboard, mouse, trackpad).
+- **System Tweaks**: Automates macOS settings (Dock, Finder, keyboard, mouse, trackpad, software updates).
 - **Developer Tools**: Installs SDKMAN, Java, Maven, VS Code extensions, and more.
 - **Shell Enhancements**: Sets up Oh My Zsh, Oh My Posh, aliases, and utilities.
 - **Modular Roles**: Easily extend or customize with Ansible roles for each component.
+- **Profile-Based Packages**: Install different tool sets per machine type via `homebrew_profiles_enabled`.
+- **Makefile Shortcuts**: Common operations available as `make` targets for convenience.
 
 ---
 
 ## ⚡ Quick Usage
 
 ```bash
-ansible-galaxy collection install community.general \
-&& ansible-pull \
-  -U http://github.com/Nikola-Popov/macos-setup \
-  -d ~/.ansible/pull/macos-setup \
-  -c ~/.ansible/pull/macos-setup/ansible.cfg \
-  playbooks/site.yml
+make pull
 ```
+
+This runs `ansible-pull` to fetch the latest version of this repo and execute the full playbook in one step.
 
 ### ⚙️ Dynamic Configuration (Extra Vars)
 
 Below is a list of all variables you can modify at runtime to customize your setup.
 
-| Variable                | Type     | Example Value                      | Description                                               |
-|-------------------------|----------|------------------------------------|-----------------------------------------------------------|
-| `git_name`              | string   | `git_name='Your Name'`             | Sets your global Git user name (prompted interactively)   |
-| `git_email`             | string   | `git_email=user@example.com`       | Sets your global Git email address (prompted interactively) |
-| `pyenv_global_version`  | string   | `pyenv_global_version=3.11.6`      | Sets the global Python version for pyenv                  |
-| `pyenv_python_versions` | list     | `pyenv_python_versions=['3.11.6','3.12.2']` | List of Python versions to install with pyenv             |
-| `sdkman_sapmachine_java_version` | integer   | `sdkman_sapmachine_java_version=17` | Sets the SAP Machine Java version with SDKMAN            |
-| `workspace_dir`         | string   | `workspace_dir=/Users/me/workspace` | Sets your workspace directory                        |
+| Variable                         | Type    | Example Value                                 | Description                                                 |
+|----------------------------------|---------|-----------------------------------------------|-------------------------------------------------------------|
+| `git_name`                       | string  | `git_name='Your Name'`                        | Sets your global Git user name (prompted interactively)     |
+| `git_email`                      | string  | `git_email=user@example.com`                  | Sets your global Git email address (prompted interactively) |
+| `pyenv_global_version`           | string  | `pyenv_global_version=3.11.6`                 | Sets the global Python version for pyenv                    |
+| `pyenv_python_versions`          | list    | `pyenv_python_versions=['3.11.6','3.12.2']`   | List of Python versions to install with pyenv               |
+| `sdkman_sapmachine_java_version` | integer | `sdkman_sapmachine_java_version=17`           | Sets the SAP Machine Java version with SDKMAN               |
+| `workspace_dir`                  | string  | `workspace_dir=/Users/me/workspace`           | Sets your workspace directory                               |
+| `homebrew_profiles_enabled`      | list    | `homebrew_profiles_enabled=['general','dev']` | Selects which package profiles to install                   |
+| `homebrew_upgrade_enabled`       | bool    | `homebrew_upgrade_enabled=false`              | Skip `brew upgrade` during re-runs to save time             |
 
 #### Git Credentials
 
@@ -64,11 +65,11 @@ The playbook will **prompt interactively** for `git_name` and `git_email`. You c
 1. **Interactive**: Answer the prompts when running the playbook
 2. **Environment variables**: Set `GIT_AUTHOR_NAME` and `GIT_AUTHOR_EMAIL` before running
 
-```bash
-# Option 2: Using environment variables
-export GIT_AUTHOR_NAME="Your Name"
-export GIT_AUTHOR_EMAIL="you@example.com"
-```
+   ```bash
+   # Option 2: Using environment variables
+   export GIT_AUTHOR_NAME="Your Name"
+   export GIT_AUTHOR_EMAIL="you@example.com"
+   ```
 
 3. **Extra vars**: Pass `-e "git_name='Your Name' git_email='you@example.com'"`
 
@@ -175,16 +176,40 @@ Prepare the environment with these one-time actions.
 ```bash
 # clone the project and navigate to it
 git clone git@github.com:Nikola-Popov/macos-setup.git && cd macos-setup
-
-# install dependencies (i.e. Ansible community collections)
-ansible-galaxy collection install community.general
 ```
 
-Run the playbook:
+Install dependencies and run the full playbook:
 
 ```bash
-ansible-playbook playbooks/site.yml
+make install-deps
+make run
 ```
+
+#### 🎯 Available Make Targets
+
+| Target              | Description                                                |
+|---------------------|------------------------------------------------------------|
+| `make run`          | Install deps and run the full playbook                     |
+| `make system`       | Run only the `system` and `homebrew` roles                 |
+| `make tools`        | Run only the tools and runtimes playbook                   |
+| `make lint`         | Run `ansible-lint` against the project                     |
+| `make check`        | Dry-run the full playbook (`--check` mode)                 |
+| `make install-deps` | Install Ansible Galaxy collections from `requirements.yml` |
+| `make pull`         | Run `ansible-pull` to fetch and execute the latest version |
+
+#### 🏷️ Selective Role Execution (Tags)
+
+Every role is tagged so you can re-run a single role without touching others:
+
+```bash
+# re-run only the git and zsh roles
+ansible-playbook playbooks/site.yml --tags git,zsh
+
+# re-run only the homebrew role (update packages)
+ansible-playbook playbooks/site.yml --tags homebrew
+```
+
+Available tags: `system`, `homebrew`, `git`, `zsh`, `oh_my_zsh`, `oh_my_posh`, `nvim`, `ghostty`, `sdkman`, `java`, `vscode`, `python`, `btop`, `claude`.
 
 ### 🧩 Extending & Customization
 
@@ -200,9 +225,7 @@ Later, include the role in one of the playbooks in `playbooks/`, so that it's pi
 
 #### 📦 Profile-Based Installation of Homebrew packages
 
-This role installs Homebrew packages and cask applications on macOS based on profile-driven configuration. You can define multiple profiles and selectively enable them to control which packages are installed.
-
-The packages are grouped under named profiles (e.g., `general`, `dev`) in `roles/homebrew/packages.yml`such as:
+Packages are grouped under named profiles (`general`, `dev`, `work`) in `roles/homebrew/vars/packages.yml`. You can define multiple profiles and selectively enable them to control which packages are installed.
 
 ```yml
 # Example package grouping
@@ -217,29 +240,36 @@ homebrew_package_profiles:
   dev:
     packages:
       - node
+    cask_packages:
+      - intellij-idea-ce
+
+  work:
+    packages:
+      - kubernetes-cli
       - helm
     cask_packages:
       - docker
 ```
 
-Then in `group_vars/all.yml` you can decive which package group to install by listing them as such:
+Then in `group_vars/all.yml` decide which profiles to enable:
 
 ```yml
 # Example package group/profile selection
 homebrew_profiles_enabled:
   - general
   - dev
+  - work
 ```
 
 #### 🧩 Install VS Code Extensions
 
-All VS Code extensions required for this setup are listed in `roles/vscode/files/extensions.txt`. Each line in this file is the unique identifier for a VS Code extension (for example, `ms-python.python`).
+VS Code extensions are defined as a YAML list in `roles/vscode/defaults/main.yml`. Each entry is the unique extension identifier (for example, `ms-python.python`).
 
 You can find the extension identifier on the extension's page in the VS Code Marketplace, as shown below:
 
 ![VS Code Extensions](docs/images/vs-code-id.png)
 
-To install a new extension, simply add its identifier to `extensions.txt` and re-run the playbook. The setup will automatically install all listed extensions for you.
+To install a new extension, add its identifier to `vscode_extensions` in `roles/vscode/defaults/main.yml` and re-run the playbook with `--tags vscode`.
 
 ---
 

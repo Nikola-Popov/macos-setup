@@ -1,0 +1,23 @@
+---
+- name: Apply macOS Software Update settings
+  block:
+    - name: Enable automatic update checks
+      community.general.osx_defaults:
+        domain: com.apple.SoftwareUpdate
+        key: AutomaticCheckEnabled
+        type: bool
+        value: "{{ system_software_update_check }}"
+
+    - name: Configure automatic update downloads
+      community.general.osx_defaults:
+        domain: com.apple.SoftwareUpdate
+        key: AutomaticDownload
+        type: bool
+        value: "{{ system_software_update_download }}"
+
+    - name: Configure automatic macOS updates
+      community.general.osx_defaults:
+        domain: com.apple.SoftwareUpdate
+        key: AutomaticallyInstallMacOSUpdates
+        type: bool
+        value: "{{ system_software_update_install_macos }}"

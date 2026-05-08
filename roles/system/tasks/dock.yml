@@ -1,24 +1,24 @@
 ---
 - name: Apply macOS Dock settings
-  notify: Restart {{ system_services.dock }}
+  notify: Restart Dock
   block:
-    - name: Set Dock minimize effect to 'scale'
+    - name: Set Dock minimize effect to '{{ system_dock_minimize_effect }}'
       community.general.osx_defaults:
         domain: com.apple.dock
         key: mineffect
         type: string
-        value: scale
+        value: "{{ system_dock_minimize_effect }}"
 
-    - name: Set Dock icon size to 40 pixels
+    - name: Set Dock icon size to {{ system_dock_icon_size }}
       community.general.osx_defaults:
         domain: com.apple.dock
         key: tilesize
         type: float
-        value: 40.0
+        value: "{{ system_dock_icon_size }}"
 
     - name: Hide recent applications from the Dock
       community.general.osx_defaults:
         domain: com.apple.dock
         key: show-recents
         type: bool
-        value: false
+        value: "{{ system_dock_show_recents }}"

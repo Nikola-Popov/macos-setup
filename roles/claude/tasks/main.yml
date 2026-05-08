@@ -1,0 +1,14 @@
+---
+- name: Install Claude Code skill '{{ item.skill }}'
+  ansible.builtin.command: >-
+    npx skills add {{ item.registry }}
+    --skill {{ item.skill }}
+    --agent claude-code
+    --global
+    --yes
+  loop: "{{ claude_skills }}"
+  loop_control:
+    label: "{{ item.skill }}"
+  args:
+    creates: "{{ ansible_user_dir }}/.claude/commands/{{ item.skill }}.md"
+  changed_when: true

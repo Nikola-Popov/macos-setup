@@ -20,26 +20,31 @@ homebrew_package_profiles:
 
   dev:
     packages:
-      - kubernetes-cli
-      - k9s
       - node
-      - helm
       - pyenv
-      - bruno
-      - intellij-idea-ce
-      - visual-studio-code
-      - docker
       - git-delta
-      - cloudfoundry-cli
       - uv
       - shellcheck
-      - kubelogin
       - btop
 
     cask_packages:
+      - bruno
+      - intellij-idea-ce
+      - visual-studio-code
       - pycharm-ce
-      - vmware-fusion
       - pgadmin4
+
+  work:
+    packages:
+      - kubernetes-cli
+      - k9s
+      - helm
+      - cloudfoundry-cli
+      - kubelogin
+
+    cask_packages:
+      - docker
+      - vmware-fusion
       - git-credential-manager
 
 homebrew_fonts:

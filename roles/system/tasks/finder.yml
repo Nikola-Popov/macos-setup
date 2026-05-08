@@ -1,6 +1,6 @@
 ---
 - name: Apply macOS Finder settings
-  notify: Restart {{ system_services.finder }}
+  notify: Restart Finder
   block:
     - name: Show path bar in Finder
       community.general.osx_defaults:
@@ -27,5 +27,12 @@
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: NSTableViewDefaultSizeMode
+        type: int
+        value: 1
+
+    - name: Show all file extensions in Finder
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleShowAllExtensions
         type: int
         value: 1

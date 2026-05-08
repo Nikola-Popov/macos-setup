@@ -1,0 +1,8 @@
+---
+ghostty_font_family: "JetBrains Mono NL"
+ghostty_font_size: 11
+ghostty_theme: "Monokai Pro Machine"
+ghostty_foreground_color: "#93f3d1"
+ghostty_cursor_color: "#7d7a7d"
+ghostty_window_height: 30
+ghostty_window_width: 170
