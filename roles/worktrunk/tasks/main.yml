@@ -1,0 +1,4 @@
+---
+- name: Install worktrunk shell integration
+  ansible.builtin.command: wt config shell install -y
+  changed_when: true

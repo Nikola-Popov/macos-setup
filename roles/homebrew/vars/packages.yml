@@ -26,6 +26,7 @@ homebrew_package_profiles:
       - uv
       - shellcheck
       - btop
+      - worktrunk
 
     cask_packages:
       - bruno

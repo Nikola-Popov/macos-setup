@@ -27,7 +27,7 @@ automate:
 - **Homebrew & Package Management**: Installs and updates Homebrew, plus your favorite CLI and GUI apps.
 - **Dotfiles & Configs**: Deploys custom dotfiles for zsh, nvim, git, and more.
 - **System Tweaks**: Automates macOS settings (Dock, Finder, keyboard, mouse, trackpad, software updates).
-- **Developer Tools**: Installs SDKMAN, Java, Maven, VS Code extensions, and more.
+- **Developer Tools**: Installs SDKMAN, Java, Maven, worktrunk, VS Code extensions, and more.
 - **Shell Enhancements**: Sets up Oh My Zsh, Oh My Posh, aliases, and utilities.
 - **Modular Roles**: Easily extend or customize with Ansible roles for each component.
 - **Profile-Based Packages**: Install different tool sets per machine type via `homebrew_profiles_enabled`.
@@ -209,7 +209,7 @@ ansible-playbook playbooks/site.yml --tags git,zsh
 ansible-playbook playbooks/site.yml --tags homebrew
 ```
 
-Available tags: `system`, `homebrew`, `git`, `zsh`, `oh_my_zsh`, `oh_my_posh`, `nvim`, `ghostty`, `sdkman`, `java`, `vscode`, `python`, `btop`, `claude`.
+Available tags: `system`, `homebrew`, `git`, `zsh`, `oh_my_zsh`, `oh_my_posh`, `nvim`, `ghostty`, `vscode`, `python`, `btop`, `claude`, `worktrunk`, `sdkman`, `java`, `maven`.
 
 ### 🧩 Extending & Customization
 
