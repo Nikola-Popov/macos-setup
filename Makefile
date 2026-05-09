@@ -17,7 +17,7 @@ lint:
 	ansible-lint
 
 check: install-deps
-	ansible-playbook $(PLAYBOOK_DIR)/site.yml --check
+	ansible-playbook $(PLAYBOOK_DIR)/site.yml --check --diff
 
 install-deps:
 	ansible-galaxy collection install -r $(GALAXY_FILE)

@@ -270,10 +270,3 @@ You can find the extension identifier on the extension's page in the VS Code Mar
 ![VS Code Extensions](docs/images/vs-code-id.png)
 
 To install a new extension, add its identifier to `vscode_extensions` in `roles/vscode/defaults/main.yml` and re-run the playbook with `--tags vscode`.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.  
-You are free to use, modify, and distribute this software with proper attribution. See the [MIT License](LICENSE) file for full details.
